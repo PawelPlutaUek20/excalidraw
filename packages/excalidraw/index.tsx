@@ -218,7 +218,6 @@ export {
   restoreLibraryItems,
 } from "./data/restore";
 export {
-  exportToCanvas,
   exportToBlob,
   exportToSvg,
   serializeAsJSON,
@@ -254,6 +253,8 @@ export { MainMenu };
 export { useDevice } from "./components/App";
 export { WelcomeScreen };
 export { LiveCollaborationTrigger };
+
+export { exportToCanvas } from "./scene/export";
 
 export { DefaultSidebar } from "./components/DefaultSidebar";
 export { TTDDialog } from "./components/TTDDialog/TTDDialog";

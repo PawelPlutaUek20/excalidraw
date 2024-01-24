@@ -90,7 +90,7 @@ import {
   EDITOR_LS_KEYS,
   isIOS,
 } from "../constants";
-import { ExportedElements, exportCanvas, loadFromBlob } from "../data";
+import { exportAsImage, ExportedElements, loadFromBlob } from "../data";
 import Library, { distributeLibraryItemsOnSquareGrid } from "../data/library";
 import { restore, restoreElements } from "../data/restore";
 import {
@@ -1732,18 +1732,20 @@ class App extends React.Component<AppProps, AppState> {
     opts: { exportingFrame: ExcalidrawFrameLikeElement | null },
   ) => {
     trackEvent("export", type, "ui");
-    const fileHandle = await exportCanvas(
+    const fileHandle = await exportAsImage({
       type,
-      elements,
-      this.state,
-      this.files,
-      {
+      data: {
+        elements,
+        appState: this.state,
+        files: this.files,
+      },
+      config: {
         exportBackground: this.state.exportBackground,
         name: this.getName(),
         viewBackgroundColor: this.state.viewBackgroundColor,
         exportingFrame: opts.exportingFrame,
       },
-    )
+    })
       .catch(muteFSAbortError)
       .catch((error) => {
         console.error(error);
@@ -1856,14 +1858,18 @@ class App extends React.Component<AppProps, AppState> {
     });
 
     const blob = await exportToBlob({
-      elements: this.scene.getNonDeletedElements(),
-      appState: {
-        ...this.state,
-        exportBackground: true,
-        viewBackgroundColor: this.state.viewBackgroundColor,
+      data: {
+        elements: this.scene.getNonDeletedElements(),
+        appState: {
+          ...this.state,
+          exportBackground: true,
+          viewBackgroundColor: this.state.viewBackgroundColor,
+        },
+        files: this.files,
       },
-      exportingFrame: magicFrame,
-      files: this.files,
+      config: {
+        exportingFrame: magicFrame,
+      },
     });
 
     const dataURL = await getDataURL(blob);

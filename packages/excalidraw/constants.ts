@@ -1,7 +1,7 @@
 import cssVariables from "./css/variables.module.scss";
-import { AppProps } from "./types";
+import { AppProps, NormalizedZoomValue } from "./types";
 import { ExcalidrawElement, FontFamilyValues } from "./element/types";
-import { COLOR_PALETTE } from "./colors";
+
 export const isDarwin = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
 export const isWindows = /^Win/.test(navigator.platform);
 export const isAndroid = /\b(android)\b/i.test(navigator.userAgent);
@@ -98,7 +98,6 @@ export const YOUTUBE_STATES = {
 
 export const ENV = {
   TEST: "test",
-  DEVELOPMENT: "development",
 };
 
 export const CLASSES = {
@@ -143,6 +142,14 @@ export const DEFAULT_TEXT_ALIGN = "left";
 export const DEFAULT_VERTICAL_ALIGN = "top";
 export const DEFAULT_VERSION = "{version}";
 export const DEFAULT_TRANSFORM_HANDLE_SPACING = 2;
+export const DEFAULT_ZOOM_VALUE = 1 as NormalizedZoomValue;
+
+// -----------------------------------------------
+// !!! these colors are tied to color picker !!!
+export const COLOR_WHITE = "#ffffff";
+export const COLOR_CHARCOAL_BLACK = "#1e1e1e";
+export const COLOR_TRANSPARENT = "transparent";
+// -----------------------------------------------
 
 export const CANVAS_ONLY_ACTIONS = ["selectAll"];
 
@@ -333,8 +340,8 @@ export const DEFAULT_ELEMENT_PROPS: {
   opacity: ExcalidrawElement["opacity"];
   locked: ExcalidrawElement["locked"];
 } = {
-  strokeColor: COLOR_PALETTE.black,
-  backgroundColor: COLOR_PALETTE.transparent,
+  strokeColor: COLOR_CHARCOAL_BLACK,
+  backgroundColor: COLOR_TRANSPARENT,
   fillStyle: "solid",
   strokeWidth: 2,
   strokeStyle: "solid",

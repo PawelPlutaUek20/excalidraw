@@ -26,11 +26,9 @@ describe("exportToSvg", () => {
   };
 
   it("with default arguments", async () => {
-    const svgElement = await exportUtils.exportToSvg(
-      ELEMENTS,
-      DEFAULT_OPTIONS,
-      null,
-    );
+    const svgElement = await exportUtils.exportToSvg({
+      data: { elements: ELEMENTS, appState: DEFAULT_OPTIONS, files: null },
+    });
 
     expect(svgElement).toMatchSnapshot();
   });
@@ -38,15 +36,17 @@ describe("exportToSvg", () => {
   it("with background color", async () => {
     const BACKGROUND_COLOR = "#abcdef";
 
-    const svgElement = await exportUtils.exportToSvg(
-      ELEMENTS,
-      {
-        ...DEFAULT_OPTIONS,
-        exportBackground: true,
-        viewBackgroundColor: BACKGROUND_COLOR,
+    const svgElement = await exportUtils.exportToSvg({
+      data: {
+        elements: ELEMENTS,
+        appState: {
+          ...DEFAULT_OPTIONS,
+          exportBackground: true,
+          viewBackgroundColor: BACKGROUND_COLOR,
+        },
+        files: null,
       },
-      null,
-    );
+    });
 
     expect(svgElement.querySelector("rect")).toHaveAttribute(
       "fill",
@@ -55,14 +55,16 @@ describe("exportToSvg", () => {
   });
 
   it("with dark mode", async () => {
-    const svgElement = await exportUtils.exportToSvg(
-      ELEMENTS,
-      {
-        ...DEFAULT_OPTIONS,
-        exportWithDarkMode: true,
+    const svgElement = await exportUtils.exportToSvg({
+      data: {
+        elements: ELEMENTS,
+        appState: {
+          ...DEFAULT_OPTIONS,
+          exportWithDarkMode: true,
+        },
+        files: null,
       },
-      null,
-    );
+    });
 
     expect(svgElement.getAttribute("filter")).toMatchInlineSnapshot(
       '"_themeFilter_1883f3"',
@@ -70,14 +72,16 @@ describe("exportToSvg", () => {
   });
 
   it("with exportPadding", async () => {
-    const svgElement = await exportUtils.exportToSvg(
-      ELEMENTS,
-      {
-        ...DEFAULT_OPTIONS,
-        exportPadding: 0,
+    const svgElement = await exportUtils.exportToSvg({
+      data: {
+        elements: ELEMENTS,
+        appState: {
+          ...DEFAULT_OPTIONS,
+          exportPadding: 0,
+        },
+        files: null,
       },
-      null,
-    );
+    });
 
     expect(svgElement).toHaveAttribute("height", ELEMENT_HEIGHT.toString());
     expect(svgElement).toHaveAttribute("width", ELEMENT_WIDTH.toString());
@@ -90,15 +94,17 @@ describe("exportToSvg", () => {
   it("with scale", async () => {
     const SCALE = 2;
 
-    const svgElement = await exportUtils.exportToSvg(
-      ELEMENTS,
-      {
-        ...DEFAULT_OPTIONS,
-        exportPadding: 0,
-        exportScale: SCALE,
+    const svgElement = await exportUtils.exportToSvg({
+      data: {
+        elements: ELEMENTS,
+        appState: {
+          ...DEFAULT_OPTIONS,
+          exportPadding: 0,
+          exportScale: SCALE,
+        },
+        files: null,
       },
-      null,
-    );
+    });
 
     expect(svgElement).toHaveAttribute(
       "height",
@@ -111,23 +117,27 @@ describe("exportToSvg", () => {
   });
 
   it("with exportEmbedScene", async () => {
-    const svgElement = await exportUtils.exportToSvg(
-      ELEMENTS,
-      {
-        ...DEFAULT_OPTIONS,
-        exportEmbedScene: true,
+    const svgElement = await exportUtils.exportToSvg({
+      data: {
+        elements: ELEMENTS,
+        appState: {
+          ...DEFAULT_OPTIONS,
+          exportEmbedScene: true,
+        },
+        files: null,
       },
-      null,
-    );
+    });
     expect(svgElement.innerHTML).toMatchSnapshot();
   });
 
   it("with elements that have a link", async () => {
-    const svgElement = await exportUtils.exportToSvg(
-      [rectangleWithLinkFixture],
-      DEFAULT_OPTIONS,
-      null,
-    );
+    const svgElement = await exportUtils.exportToSvg({
+      data: {
+        elements: [rectangleWithLinkFixture],
+        appState: DEFAULT_OPTIONS,
+        files: null,
+      },
+    });
     expect(svgElement.innerHTML).toMatchSnapshot();
   });
 });
@@ -167,9 +177,13 @@ describe("exporting frames", () => {
       ];
 
       const canvas = await exportToCanvas({
-        elements,
-        files: null,
-        exportPadding: 0,
+        data: {
+          elements,
+          files: null,
+        },
+        config: {
+          padding: 0,
+        },
       });
 
       expect(canvas.width).toEqual(200);
@@ -196,10 +210,14 @@ describe("exporting frames", () => {
       ];
 
       const canvas = await exportToCanvas({
-        elements,
-        files: null,
-        exportPadding: 0,
-        exportingFrame: frame,
+        data: {
+          elements,
+          files: null,
+        },
+        config: {
+          padding: 0,
+          exportingFrame: frame,
+        },
       });
 
       expect(canvas.width).toEqual(frame.width);
@@ -235,10 +253,11 @@ describe("exporting frames", () => {
       });
 
       const svg = await exportToSvg({
-        elements: [rectOverlapping, frame, frameChild],
-        files: null,
-        exportPadding: 0,
-        exportingFrame: frame,
+        data: { elements: [rectOverlapping, frame, frameChild], files: null },
+        config: {
+          padding: 0,
+          exportingFrame: frame,
+        },
       });
 
       // frame itself isn't exported
@@ -279,10 +298,11 @@ describe("exporting frames", () => {
       });
 
       const svg = await exportToSvg({
-        elements: [frameChild, frame, elementOutside],
-        files: null,
-        exportPadding: 0,
-        exportingFrame: frame,
+        data: { elements: [frameChild, frame, elementOutside], files: null },
+        config: {
+          padding: 0,
+          exportingFrame: frame,
+        },
       });
 
       // frame itself isn't exported
@@ -347,10 +367,11 @@ describe("exporting frames", () => {
       );
 
       const svg = await exportToSvg({
-        elements: exportedElements,
-        files: null,
-        exportPadding: 0,
-        exportingFrame,
+        data: { elements: exportedElements, files: null },
+        config: {
+          padding: 0,
+          exportingFrame,
+        },
       });
 
       // frames themselves should be exported when multiple frames selected
@@ -392,10 +413,14 @@ describe("exporting frames", () => {
       );
 
       const svg = await exportToSvg({
-        elements: exportedElements,
-        files: null,
-        exportPadding: 0,
-        exportingFrame,
+        data: {
+          elements: exportedElements,
+          files: null,
+        },
+        config: {
+          padding: 0,
+          exportingFrame,
+        },
       });
 
       // frame itself isn't exported
@@ -451,10 +476,14 @@ describe("exporting frames", () => {
       );
 
       const svg = await exportToSvg({
-        elements: exportedElements,
-        files: null,
-        exportPadding: 0,
-        exportingFrame,
+        data: {
+          elements: exportedElements,
+          files: null,
+        },
+        config: {
+          padding: 0,
+          exportingFrame,
+        },
       });
 
       // frame shouldn't be exported
