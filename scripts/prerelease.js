@@ -1,6 +1,5 @@
 const fs = require("fs");
 const util = require("util");
-const path = require("path");
 const exec = util.promisify(require("child_process").exec);
 const updateChangelog = require("./updateChangelog");
 
