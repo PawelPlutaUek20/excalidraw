@@ -29,7 +29,7 @@ const prerelease = async (nextVersion) => {
   }
 };
 
-const nextVersion = process.argv.slice(2)[0];
+const nextVersion = "1.0.0"; // process.argv.slice(2)[0];
 if (!nextVersion) {
   console.error("Pass the next version to release!");
   process.exit(1);

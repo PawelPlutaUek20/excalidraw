@@ -11,7 +11,7 @@ The change should be grouped under one of the below section and must contain PR 
 Please add the latest change on the top under the correct section.
 -->
 
-## Unreleased
+## 1.0.0 (2024-02-20)
 
 ### Features
 
@@ -77,6 +77,159 @@ define: {
 
 - `appState.openDialog` type was changed from `null | string` to `null | { name: string }`. [#7336](https://github.com/excalidraw/excalidraw/pull/7336)
 
+## Excalidraw Library
+
+**_This section lists the updates made to the excalidraw library and will not affect the integration._**
+
+### Features
+
+- Change collab trigger & add share dialog [#7647](https://github.com/excalidraw/excalidraw/pull/7647)
+
+- Add loading state to FilledButton [#7650](https://github.com/excalidraw/excalidraw/pull/7650)
+
+- Support roundness for images [#7558](https://github.com/excalidraw/excalidraw/pull/7558)
+
+- Add pasted elements to frame under cursor [#7590](https://github.com/excalidraw/excalidraw/pull/7590)
+
+- Redirect font requests to cdn [#7549](https://github.com/excalidraw/excalidraw/pull/7549)
+
+- Erase groups atomically [#7545](https://github.com/excalidraw/excalidraw/pull/7545)
+
+- Add eraser tool trail [#7511](https://github.com/excalidraw/excalidraw/pull/7511)
+
+- Render embeds lazily [#7519](https://github.com/excalidraw/excalidraw/pull/7519)
+
+- Update X brand logo & tweak labels [#7518](https://github.com/excalidraw/excalidraw/pull/7518)
+
+- Support multi-embed pasting & x.com domain [#7516](https://github.com/excalidraw/excalidraw/pull/7516)
+
+- Support pen erasing [#7496](https://github.com/excalidraw/excalidraw/pull/7496)
+
+- Bump `socket.io-client` & collab tweaks [#7444](https://github.com/excalidraw/excalidraw/pull/7444)
+
+- Follow mode [#6848](https://github.com/excalidraw/excalidraw/pull/6848)
+
+- Move utils to utils package and make @excalidraw/utils a workspace [#7432](https://github.com/excalidraw/excalidraw/pull/7432)
+
+- Support Mermaid Class diagrams 🥳 [#7381](https://github.com/excalidraw/excalidraw/pull/7381)
+
+- Add support for more UML arrowheads [#7391](https://github.com/excalidraw/excalidraw/pull/7391)
+
+- TTD dialog UI tweaks [#7384](https://github.com/excalidraw/excalidraw/pull/7384)
+
+- TTD dialog tweaks [#7346](https://github.com/excalidraw/excalidraw/pull/7346)
+
+- Text-to-diagram [#7325](https://github.com/excalidraw/excalidraw/pull/7325)
+
+- Wireframe-to-code [#7334](https://github.com/excalidraw/excalidraw/pull/7334)
+
+- Expose `ActionManager.registerAction` through `ExcalidrawImperativeAPI` [#6995](https://github.com/excalidraw/excalidraw/pull/6995)
+
+- Change frame resizing behavior [#7307](https://github.com/excalidraw/excalidraw/pull/7307)
+
+### Fixes
+
+- Make bounds independent of scene [#7679](https://github.com/excalidraw/excalidraw/pull/7679)
+
+- Make LinearElementEditor independent of scene [#7670](https://github.com/excalidraw/excalidraw/pull/7670)
+
+- Remove scene from getElementAbsoluteCoords and dependent functions and use elementsMap [#7663](https://github.com/excalidraw/excalidraw/pull/7663)
+
+- Remove t from getDefaultAppState and allow name to be nullable [#7666](https://github.com/excalidraw/excalidraw/pull/7666)
+
+- Prevent panning to trigger history on macos chrome [#7671](https://github.com/excalidraw/excalidraw/pull/7671)
+
+- File save timing out with big file sizes [#7649](https://github.com/excalidraw/excalidraw/pull/7649)
+
+- Make getEmbedLink independent of t function [#7643](https://github.com/excalidraw/excalidraw/pull/7643)
+
+- Follow mode border for hosts apps [#7642](https://github.com/excalidraw/excalidraw/pull/7642)
+
+- Don't bundle react and jotai when importing from scene [#7640](https://github.com/excalidraw/excalidraw/pull/7640)
+
+- Decouple container cache logic to containerCache. [#7637](https://github.com/excalidraw/excalidraw/pull/7637)
+
+- Don't bundle react-dom when importing from transformHandles [#7634](https://github.com/excalidraw/excalidraw/pull/7634)
+
+- Don't bundle react-dom when importing from element [#7635](https://github.com/excalidraw/excalidraw/pull/7635)
+
+- Frame name field [#7457](https://github.com/excalidraw/excalidraw/pull/7457)
+
+- Make getBoundTextElement and related helpers pure [#7601](https://github.com/excalidraw/excalidraw/pull/7601)
+
+- Revert `mapElementIds` flag removal [#7594](https://github.com/excalidraw/excalidraw/pull/7594)
+
+- Filter out elements not overlapping frame on paste [#7591](https://github.com/excalidraw/excalidraw/pull/7591)
+
+- Frame name editing inconvenience [#7437](https://github.com/excalidraw/excalidraw/pull/7437)
+
+- Truncate collaborator name in dropdown. [#7576](https://github.com/excalidraw/excalidraw/pull/7576)
+
+- Exporting frame-overlapping elements belonging to other frames [#7584](https://github.com/excalidraw/excalidraw/pull/7584)
+
+- Prevent the library label from being collapsed [#7579](https://github.com/excalidraw/excalidraw/pull/7579)
+
+- Move default to last so its compatible with nextjs [#7561](https://github.com/excalidraw/excalidraw/pull/7561)
+
+- Translating frames containing grouped text containers [#7557](https://github.com/excalidraw/excalidraw/pull/7557)
+
+- Host font assets from root [#7548](https://github.com/excalidraw/excalidraw/pull/7548)
+
+- Do not modify elements while erasing [#7531](https://github.com/excalidraw/excalidraw/pull/7531)
+
+- Decouple react and react-dom imports from utils and make it treeshakeable [#7527](https://github.com/excalidraw/excalidraw/pull/7527)
+
+- Drawing-tablet stylus touch events being prevented [#7494](https://github.com/excalidraw/excalidraw/pull/7494)
+
+- Missing cross-env from build:umd in package.json [#7460](https://github.com/excalidraw/excalidraw/pull/7460)
+
+- Incorrect types in `ActionNavigate` [#7462](https://github.com/excalidraw/excalidraw/pull/7462)
+
+- Mixing clientId & socketId in UserList [#7461](https://github.com/excalidraw/excalidraw/pull/7461)
+
+- Follow mode collaborator status indicator [#7459](https://github.com/excalidraw/excalidraw/pull/7459)
+
+- Empty snapLines arrays would cause re-render [#7454](https://github.com/excalidraw/excalidraw/pull/7454)
+
+- Import `Socket` as type [#7446](https://github.com/excalidraw/excalidraw/pull/7446)
+
+- Follow-mode tweaks [#7443](https://github.com/excalidraw/excalidraw/pull/7443)
+
+- Update path of files in docs [#7428](https://github.com/excalidraw/excalidraw/pull/7428)
+
+- Env variable for text-to-diagram and use frozen lock file when install deps in excalidraw-app [#7409](https://github.com/excalidraw/excalidraw/pull/7409)
+
+- Disable caching bounds for arrow labels [#7343](https://github.com/excalidraw/excalidraw/pull/7343)
+
+- Bounds cached prematurely resulting in incorrectly rendered labels [#7339](https://github.com/excalidraw/excalidraw/pull/7339)
+
+- T2c settings dialog spacing for apps that use CSS resets [#7337](https://github.com/excalidraw/excalidraw/pull/7337)
+
+- Make zoomToFit fitToViewport account for sidebar [#7298](https://github.com/excalidraw/excalidraw/pull/7298)
+
+###  Refactor
+
+- Remove portal as it is no longer needed [#7623](https://github.com/excalidraw/excalidraw/pull/7623)
+
+- Decoupling global Scene state part-1 [#7577](https://github.com/excalidraw/excalidraw/pull/7577)
+
+- Editor events sub/unsub refactor [#7483](https://github.com/excalidraw/excalidraw/pull/7483)
+
+- Fix Typo [#7445](https://github.com/excalidraw/excalidraw/pull/7445)
+
+### Build
+
+- Welcome ESM and Bye Bye UMD [#7441](https://github.com/excalidraw/excalidraw/pull/7441)
+
+- Decouple package deps and introduce yarn workspaces [#7415](https://github.com/excalidraw/excalidraw/pull/7415)
+
+- Move build process and excalidraw-app dependencies in its own package.json [#7021](https://github.com/excalidraw/excalidraw/pull/7021)
+
+- Allow a range of major node versions [#7306](https://github.com/excalidraw/excalidraw/pull/7306)
+
+- Use caret for specifying node version to avoid major upgrades automatically [#7297](https://github.com/excalidraw/excalidraw/pull/7297)
+
+---
 ## 0.17.0 (2023-11-14)
 
 ### Features
