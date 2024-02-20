@@ -1,9 +1,10 @@
 const fs = require("fs");
 const util = require("util");
+const path = require("path");
 const exec = util.promisify(require("child_process").exec);
 const updateChangelog = require("./updateChangelog");
 
-const excalidrawDir = `${__dirname}/../packages/excalidraw/packages/excalidraw`;
+const excalidrawDir = `${__dirname}/../packages/excalidraw`;
 const excalidrawPackage = `${excalidrawDir}/package.json`;
 
 const updatePackageVersion = (nextVersion) => {
@@ -29,7 +30,10 @@ const prerelease = async (nextVersion) => {
   }
 };
 
-const nextVersion = process.argv.slice(2)[0];
+const nextVersion = "1.0.0" // process.argv.slice(2)[0];
+
+console.log(process.argv,  process.argv.slice(2));
+
 if (!nextVersion) {
   console.error("Pass the next version to release!");
   process.exit(1);
