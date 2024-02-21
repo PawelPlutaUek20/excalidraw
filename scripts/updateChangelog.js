@@ -77,28 +77,28 @@ const getLibraryCommitsSinceLastRelease = async () => {
 };
 
 const updateChangelog = async (nextVersion) => {
-  const commitList = await getLibraryCommitsSinceLastRelease();
-  let changelogForLibrary =
-    "## Excalidraw Library\n\n**_This section lists the updates made to the excalidraw library and will not affect the integration._**\n\n";
-  supportedTypes.forEach((type) => {
-    if (commitList[type].length) {
-      changelogForLibrary += `### ${headerForType[type]}\n\n`;
-      const commits = commitList[type];
-      commits.forEach((commit) => {
-        changelogForLibrary += `- ${commit}\n\n`;
-      });
-    }
-  });
-  changelogForLibrary += "---\n";
-  const lastVersionIndex = existingChangeLog.indexOf(`## ${lastVersion}`);
-  let updatedContent =
-    existingChangeLog.slice(0, lastVersionIndex) +
-    changelogForLibrary +
-    existingChangeLog.slice(lastVersionIndex);
-  const currentDate = new Date().toISOString().slice(0, 10);
-  const newVersion = `## ${nextVersion} (${currentDate})`;
-  updatedContent = updatedContent.replace(`## Unreleased`, newVersion);
-  fs.writeFileSync(`${excalidrawDir}/CHANGELOG.md`, updatedContent, "utf8");
+  // const commitList = await getLibraryCommitsSinceLastRelease();
+  // let changelogForLibrary =
+  //   "## Excalidraw Library\n\n**_This section lists the updates made to the excalidraw library and will not affect the integration._**\n\n";
+  // supportedTypes.forEach((type) => {
+  //   if (commitList[type].length) {
+  //     changelogForLibrary += `### ${headerForType[type]}\n\n`;
+  //     const commits = commitList[type];
+  //     commits.forEach((commit) => {
+  //       changelogForLibrary += `- ${commit}\n\n`;
+  //     });
+  //   }
+  // });
+  // changelogForLibrary += "---\n";
+  // const lastVersionIndex = existingChangeLog.indexOf(`## ${lastVersion}`);
+  // let updatedContent =
+  //   existingChangeLog.slice(0, lastVersionIndex) +
+  //   changelogForLibrary +
+  //   existingChangeLog.slice(lastVersionIndex);
+  // const currentDate = new Date().toISOString().slice(0, 10);
+  // const newVersion = `## ${nextVersion} (${currentDate})`;
+  // updatedContent = updatedContent.replace(`## Unreleased`, newVersion);
+  // fs.writeFileSync(`${excalidrawDir}/CHANGELOG.md`, updatedContent, "utf8");
 };
 
 module.exports = updateChangelog;
